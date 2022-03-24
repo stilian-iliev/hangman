@@ -1,5 +1,3 @@
-const host = 'https://random-word-form.herokuapp.com';
-
 async function request(url, method='get', data){
     const options = {method, headers: {}};
     if (data != undefined) {
@@ -11,7 +9,7 @@ async function request(url, method='get', data){
     }
 
     try {
-        const res = await fetch(host + url, options);
+        const res = await fetch(url, options);
         if (!res.ok) {
             const error = await res.json();
             throw new Error(error.message);
