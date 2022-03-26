@@ -1,16 +1,18 @@
 import { post, get, put, del } from "./api.js";
 import { getWord } from "../utils.js";
 
+const playable = [0,3,4,7,10,11,12,16,17,18,20,22,24];
+
 export async function getRandomWord() {
     const req = await get("https://www.hangmanwords.com/_next/data/J2wi8mWpYsUem3T8ydTLL/words.json");
-    const category = req.pageProps.allGames[Math.floor(Math.random() * req.pageProps.allGames.length)];
+    const index = Math.floor(Math.random() * playable.length);
+    const category = req.pageProps.allGames[playable[index]];
     const word = category.words[Math.floor(Math.random() * category.words.length)];
-    sessionStorage.setItem('currentWord', JSON.stringify({ currentWord: word }));
-    console.log(category.h1);
+    sessionStorage.setItem('currentWord', JSON.stringify({ currentWord: word.toUpperCase() }));
     return category.h1;
 }
 
-export async function getWordDefinition() {  
-    let def = await get("https://api.dictionaryapi.dev/api/v2/entries/en/" + getWord());
+export async function getWordDefinition(word) {  
+    let def = await get("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
     return def[0].meanings[0].definitions[0].definition;
 }

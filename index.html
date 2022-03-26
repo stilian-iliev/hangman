@@ -9,7 +9,7 @@
     <script type="module" src="/src/app.js"></script>
 </head>
 <body>
-    <h1>Hangman</h1>
+    <h1>Word Category:</h1>
     <p id="category"></p>
     <div class="game-container">
         <svg height="250" width="200" class="figure-container">
@@ -20,19 +20,49 @@
             <line x1="20" y1="230" x2="100" y2="230" />
 
             <!-- Head -->
-            <circle cx="140" cy="70" r="20" class="figure-part" />
+            <circle cx="140" cy="70" r="20" class="figure-part hidden" />
             <!-- Body -->
-            <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
+            <line x1="140" y1="90" x2="140" y2="150" class="figure-part hidden" />
             <!-- Arms -->
-            <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
-            <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
+            <line x1="140" y1="120" x2="120" y2="100" class="figure-part hidden" />
+            <line x1="140" y1="120" x2="160" y2="100" class="figure-part hidden" />
             <!-- Legs -->
-            <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
-            <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
+            <line x1="140" y1="150" x2="120" y2="180" class="figure-part hidden" />
+            <line x1="140" y1="150" x2="160" y2="180" class="figure-part hidden" />
         </svg>
         <div class="word" id="word"></div>
     </div>
     <div id="keyboard">
+        <!-- <div class="row one">
+            <button>A</button>
+            <button>B</button>
+            <button>C</button>
+            <button>D</button>
+            <button>E</button>
+            <button>F</button>
+            <button>G</button>
+            <button>H</button>
+            <button>I</button>
+            <button>J</button>
+            <button>K</button>
+            <button>L</button>
+            <button>M</button>
+        </div>
+        <div class="row two">
+            <button>N</button>
+            <button>O</button>
+            <button>P</button>
+            <button>Q</button>
+            <button>R</button>
+            <button>S</button>
+            <button>T</button>
+            <button>U</button>
+            <button>V</button>
+            <button>W</button>
+            <button>X</button>
+            <button>Y</button>
+            <button>Z</button>
+        </div> -->
         <div class="row">
             <button>Q</button>
             <button>W</button>
@@ -65,14 +95,11 @@
             <button>N</button>
             <button>M</button>
         </div>
+        
     </div>
-
-    <!-- Container for final message -->
-    <div class="popup-container" id="popup-container">
-        <div class="popup">
-            <h2 id="final-message"></h2>
-            <button id="play-button">Play Again</button>
-        </div>
+    <div id="end-game-container">
+        <p id="message"></p>
+        <button id="play-again">Play Again</button>
     </div>
 </body>
 </html>
