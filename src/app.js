@@ -46,12 +46,15 @@ async function restartGame() {
     wordEl.innerHTML = "";
     for (let i = 0; i < getWord().length; i++) {
         const span = document.createElement("span");
+        span.textContent = " ";
         if (getWord()[i] == " ") {
             span.classList.add("space");
+        } else if (getWord()[i] == "\'") {
+            span.classList.add("space");
+            span.innerHTML = "\'";
         } else {
-        span.classList.add("letter");
+            span.classList.add("letter");
         }
-        span.textContent = " ";
         wordEl.appendChild(span);
     }
     endGameContainer.style.display = "none";
