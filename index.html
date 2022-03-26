@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/static/site.css">
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <h1>Word Category:</h1>
@@ -31,6 +32,80 @@
             <line x1="140" y1="150" x2="160" y2="180" class="figure-part hidden" />
         </svg>
         <div class="word" id="word"></div>
+    </div>
+    <a href="#" id="filter-btn"><i class="fa fa-bars"></i> Categories</a>
+    <!-- <a href="#" id="filter-btn"><i class="fa-solid fa-circle-question"></i> Categories</a> -->
+    <div id="category-filter" class="filter-is-visible ">
+        <form>
+            <div class="filter-block">
+                <h4>  Select Categories</h4>
+
+                <ul class="categories-list">
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Animals</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Chemistry</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Christmas</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Fall</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Geography</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Halloween</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Hard Words</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Math</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Movies</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Music</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Science</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Sports</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked>
+                        <label>Television</label>
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <a href="#" id="apply-categories-btn" class="cd-save">Save</a>
+        <a href="#" id="close-category-btn" class="cd-close"><i class="fa fa-close"></i></a>
     </div>
     <div id="keyboard">
         <!-- <div class="row one">

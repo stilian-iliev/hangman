@@ -132,3 +132,59 @@ button {
 #end-game-container {
     margin-top: 25px;
 }
+
+#filter-btn {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-left: 24px;
+    text-decoration: initial;
+}
+
+#category-filter {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: #3b3b3b86;
+    box-shadow: 4px 4px 20px transparent;
+    z-index: 2;
+  }
+
+  #category-filter h4 {
+      text-align: center;
+  }
+
+
+.cd-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    line-height: 50px;
+    width: 60px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .categories-list li {
+      padding-top: 12px;
+  }
+
+  .cd-save {
+      position: relative;
+      display: block;
+      text-align: center;
+    color: white;
+    padding-top: 20%;
+    text-decoration: initial;
+    font-size: 1.4rem;
+  }

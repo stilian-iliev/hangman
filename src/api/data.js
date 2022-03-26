@@ -1,7 +1,11 @@
 import { post, get, put, del } from "./api.js";
 import { getWord } from "../utils.js";
 
-const playable = [0,3,4,7,10,11,12,16,17,18,20,22,24];
+let playable = [0,3,4,7,10,11,12,16,17,18,20,22,24];
+
+export function setPlayable(newCategories) {
+    playable = newCategories;
+}
 
 export async function getRandomWord() {
     const req = await get("https://www.hangmanwords.com/_next/data/J2wi8mWpYsUem3T8ydTLL/words.json");
