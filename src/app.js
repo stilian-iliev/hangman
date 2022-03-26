@@ -1,95 +1,53 @@
-import { getRandomWord, getWordDefinition } from "./api/data.js";
-import { checkLetter, displayLetter } from "./game.js";
-import { getWord } from "./utils.js";
+import { restartGame } from "./game.js";
+import { setPlayable } from "./api/data.js";
 
-const buttons = document.querySelectorAll("#keyboard button");
-const figureParts = document.querySelectorAll(".figure-part");
-const wordEl = document.querySelector("#word");
-const category = document.querySelector("#category");
-const keyboard = document.getElementById("keyboard");
-const endGameContainer = document.querySelector("#end-game-container");
-document.querySelector("#play-again").addEventListener("click", restartGame);
-keyboard.addEventListener("click", onGuess);
+const categoryMenu = document.querySelector("#category-filter");
 
-function onGuess(event) {
-    if (event.target.tagName == "BUTTON") {
-        checkLetter(event.target);
-        event.target.disabled = true;
-        
-        const letterArr = Array.from(wordEl.children).map(e => e.textContent);
-        const written = letterArr.join("");
-        if (getWord() == written) {
-            onWin();
+const openCategoryBtn = document.querySelector("#filter-btn");
+openCategoryBtn.addEventListener("click", openCategoryMenu);
+const closeCategoryBtn = document.querySelector("#close-category-btn");
+closeCategoryBtn.addEventListener("click", closeCategoryMenu);
+
+const categoriesBoxes = document.querySelector(".categories-list").children;
+
+const saveBtn = document.querySelector("#apply-categories-btn");
+saveBtn.addEventListener("click", saveCategories);
+
+let categoriesList = 
+{"Animals":0,
+"Chemistry":3,
+"Christmas":4,
+"Fall":7,
+"Geography":10,
+"Halloween":11,
+"Hard Words":12,
+"Math":16,
+"Movies":17,
+"Music":18,
+"Science":20,
+"Sports":22,
+"Television":24};
+
+function openCategoryMenu() {
+    openCategoryBtn.style.display = "none";
+    categoryMenu.style.display = "block";
+}
+
+function closeCategoryMenu(){
+    categoryMenu.style.display = "none";
+    openCategoryBtn.style.display = "block";
+}
+
+function saveCategories() {
+    closeCategoryMenu();
+    let categoryIds = [];
+    for (const box of categoriesBoxes) {
+        if (box.children[0].checked) {
+            categoryIds[categoryIds.length] = categoriesList[box.children[1].textContent];
         }
-        if (document.querySelector(".figure-part.hidden") == null) {
-            onLose();
-        }
-    
     }
-}
-
-function onWin() {
-    displayWord("green");
-    disableButtons();
-    showMessage("You won");
-}
-function onLose() {
-    displayWord("red");
-    showMessage("You lost");
-    disableButtons();
-}
-
-async function restartGame() {
-    resetButtons();
-    resetFigure();
-    category.textContent = await getRandomWord();
-    wordEl.innerHTML = "";
-    for (let i = 0; i < getWord().length; i++) {
-        const span = document.createElement("span");
-        span.textContent = " ";
-        if (getWord()[i] == " ") {
-            span.classList.add("space");
-        } else if (getWord()[i] == "\'") {
-            span.classList.add("space");
-            span.innerHTML = "\'";
-        } else {
-            span.classList.add("letter");
-        }
-        wordEl.appendChild(span);
-    }
-    endGameContainer.style.display = "none";
-    
-}
-
-function resetButtons() {
-    for(const button of buttons){
-        button.className = "";
-        button.disabled = false;
-    }
-}
-
-function resetFigure() {
-    for (const part of figureParts) {
-        part.classList.add("hidden");
-        part.style.display = "none";
-    }
-}
-
-function disableButtons() {
-    for (const button of buttons) {
-        button.disabled = true;
-    }
-}
-
-function displayWord(color){
-    for (const letter of [...getWord()]) {
-        displayLetter(letter, color);
-    }
-}
-
-function showMessage(message) {
-    endGameContainer.style.display = "block";
-    endGameContainer.querySelector("#message").textContent = message;
+    setPlayable(categoryIds);
+    restartGame();
 }
 
 restartGame();
