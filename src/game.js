@@ -1,4 +1,3 @@
-import { getWord } from "./utils.js";
 import { getRandomWord, getWordDefinition } from "./api/data.js";
 
 const buttons = document.querySelectorAll("#keyboard button");
@@ -10,6 +9,7 @@ const endGameContainer = document.querySelector("#end-game-container");
 document.querySelector("#play-again").addEventListener("click", restartGame);
 keyboard.addEventListener("click", onGuess);
 
+let word = "";
 
 function onGuess(event) {
     if (event.target.tagName == "BUTTON") {
@@ -18,7 +18,7 @@ function onGuess(event) {
         
         const letterArr = Array.from(wordEl.children).map(e => e.textContent);
         const written = letterArr.join("");
-        if (getWord() == written) {
+        if (word == written) {
             onWin();
         }
         if (document.querySelector(".figure-part.hidden") == null) {
@@ -29,7 +29,7 @@ function onGuess(event) {
 
 export function checkLetter(key) {
     const letter = key.textContent;
-    if(getWord().includes(letter)){
+    if(word.includes(letter)){
         key.classList.add("letter-correct");
         displayLetter(letter);
         return true;
@@ -40,7 +40,7 @@ export function checkLetter(key) {
 }
 
 export function displayLetter(letter, color) {
-    let temp = getWord();
+    let temp = word;
     
     while (temp.indexOf(letter) != -1) {
         const index = temp.indexOf(letter);
@@ -71,16 +71,18 @@ function onLose() {
 export async function restartGame() {
     resetButtons();
     resetFigure();
-    category.textContent = await getRandomWord();
+    const data = await getRandomWord();
+    category.textContent = data.category;
+    word = data.word;
     wordEl.innerHTML = "";
-    for (let i = 0; i < getWord().length; i++) {
+    for (let i = 0; i < word.length; i++) {
         const span = document.createElement("span");
         span.textContent = " ";
-        if (getWord()[i].match(/[a-z]/i)){
+        if (word[i].match(/[a-z]/i)){
             span.classList.add("letter");
         } else {
             span.classList.add("space");
-            span.textContent = getWord()[i];
+            span.textContent = word[i];
         }
         wordEl.appendChild(span);
     }
@@ -108,7 +110,7 @@ function disableButtons() {
 }
 
 function displayWord(color){
-    for (const letter of [...getWord()]) {
+    for (const letter of [...word]) {
         displayLetter(letter, color);
     }
 }
